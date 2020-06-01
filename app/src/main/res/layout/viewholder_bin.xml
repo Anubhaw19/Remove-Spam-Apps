@@ -14,28 +14,40 @@
         app:cardCornerRadius="15dp"
         android:padding="5dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <TextView
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@mipmap/ic_launcher_round"
+                android:id="@+id/app_icon"
+                android:layout_alignParentLeft="true"/>
+            <ImageButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/ic_delete_forever_black_24dp"
+                android:layout_alignParentRight="true"/>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="AppName "
-                android:id="@+id/location_txt"
-                android:layout_margin="5dp"
-                android:textStyle="bold"/>
+                android:orientation="vertical"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="100dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="PackageName:"
-                android:id="@+id/dry_txt"
-                android:layout_margin="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_appName"
+                    android:text="App name"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="packageneme"
+                    android:id="@+id/txt_packageName"/>
 
+            </LinearLayout>
+        </RelativeLayout>
 
-
-        </LinearLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

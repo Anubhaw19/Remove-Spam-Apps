@@ -55,8 +55,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView,OnItemListener onItemListener) {
             super(itemView);
             this.onItemListener=onItemListener;
-            AppName=itemView.findViewById(R.id.location_txt);
-            PackageName=itemView.findViewById(R.id.dry_txt);
+            AppName=itemView.findViewById(R.id.txt_appName);
+            PackageName=itemView.findViewById(R.id.txt_packageName);
 
 
             itemView.setOnClickListener(this);
