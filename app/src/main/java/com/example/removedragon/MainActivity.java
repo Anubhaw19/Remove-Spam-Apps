@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -13,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,12 +30,18 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     private DataAdapter adapter;
     FloatingActionButton btnRefresh;
     ProgressBar progressBar;
+    private ArrayList<String> data2_name=new ArrayList<>();
+    private ArrayList<String> data2_packageName=new ArrayList<>();
+//    PackageManager packageManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        packageManager=getPackageManager();
         initViews();
     }
+
     private void initViews() {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerBin);
         recyclerView.setHasFixedSize(true);
@@ -50,36 +60,78 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
         });
         loadJSON();
     }
+
     private void loadJSON() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://bit.ly/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        Call<DataList> call = apiInterface.getInfo();
-        call.enqueue(new Callback<DataList>() {
-            @Override
-            public void onResponse(Call<DataList> call, Response<DataList> response) {
-                progressBar.setVisibility(View.INVISIBLE);
-                DataList dataList = response.body();
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("https://bit.ly/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+//        Call<DataList> call = apiInterface.getInfo();
+//        call.enqueue(new Callback<DataList>() {
+//            @Override
+//            public void onResponse(Call<DataList> call, Response<DataList> response) {
+//                progressBar.setVisibility(View.INVISIBLE);
+//                DataList dataList = response.body();
+//
+//                data = new ArrayList<>(Arrays.asList(dataList.getSheet1()));
+//                installedApps();
+//                adapter = new DataAdapter(data, MainActivity.this,data2_name,data2_packageName,getPackageManager());
+//                recyclerView.setAdapter(adapter);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<DataList> call, Throwable t) {
+//                progressBar.setVisibility(View.INVISIBLE);
+//                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+//
+//            }
+//        });
 
-                data = new ArrayList<>(Arrays.asList(dataList.getSheet1()));
-                adapter = new DataAdapter(data, MainActivity.this);
-                recyclerView.setAdapter(adapter);
-            }
 
-            @Override
-            public void onFailure(Call<DataList> call, Throwable t) {
-                progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
-            }
-        });
+
+
+        installedApps();
+        adapter = new DataAdapter(data, MainActivity.this,data2_name,data2_packageName,getPackageManager());
+        recyclerView.setAdapter(adapter);
+
+
+
+
+
+
+
     }
 
     @Override
     public void OnListClick(int position) {
-        Toast.makeText(this,"click",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "click", Toast.LENGTH_LONG).show();
 
+    }
+
+    private void installedApps() {
+        List<PackageInfo> packageList = getPackageManager().getInstalledPackages(0);
+        for (int i = 0; i < packageList.size(); i++) {
+            PackageInfo packageInfo = packageList.get(i);
+
+
+            String appName = packageInfo.applicationInfo.loadLabel(getPackageManager()).toString();
+            String packageName = packageInfo.packageName;
+
+            data2_name.add(appName);
+            data2_packageName.add(packageName);
+
+
+//            Drawable appIcon = null;
+//            try {
+//                appIcon = getPackageManager().getApplicationIcon("com.whatsapp");
+//                imageView.setImageDrawable(appIcon);
+//
+//            } catch (PackageManager.NameNotFoundException e) {
+//                imageView.setImageDrawable(R.drawable.ic_launcher_foreground);
+//                e.printStackTrace();
+//            }
+        }
     }
 }
