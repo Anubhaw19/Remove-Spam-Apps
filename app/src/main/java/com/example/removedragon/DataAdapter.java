@@ -35,10 +35,10 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     @Override
     //for setting of data in the View.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.locaion.setText("Location : "+datalist.get(position).getLatitude()+" , "+datalist.get(position).getLongitude());
-        holder.dry.setText("DRY WASTE : "+datalist.get(position).getPERCENT_DRY()+" % filled");
-        holder.wet.setText("WET WASTE : "+datalist.get(position).getPERCENT_WET()+" % filled");
-        holder.metal.setText("METALLIC WASTE : "+datalist.get(position).getPERCENT_METALLIC()+" % filled");
+        holder.AppName.setText("Name : "+datalist.get(position).getName());
+        holder.PackageName.setText("package Name : "+datalist.get(position).getPackagName());
+
+
 
     }
 
@@ -50,15 +50,14 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 //****************************************************************************************************
     protected  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
-        TextView locaion,dry,wet,metal;
+        TextView AppName,PackageName;
         OnItemListener onItemListener;
         public ViewHolder(@NonNull View itemView,OnItemListener onItemListener) {
             super(itemView);
             this.onItemListener=onItemListener;
-            locaion=itemView.findViewById(R.id.location_txt);
-            dry=itemView.findViewById(R.id.dry_txt);
-            wet=itemView.findViewById(R.id.wet_txt);
-            metal=itemView.findViewById(R.id.metallic_txt);
+            AppName=itemView.findViewById(R.id.location_txt);
+            PackageName=itemView.findViewById(R.id.dry_txt);
+
 
             itemView.setOnClickListener(this);
 

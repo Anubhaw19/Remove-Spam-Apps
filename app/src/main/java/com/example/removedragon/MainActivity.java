@@ -72,12 +72,14 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
             public void onFailure(Call<DataList> call, Throwable t) {
                 progressBar.setVisibility(View.INVISIBLE);
                 Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+
             }
         });
     }
 
     @Override
     public void OnListClick(int position) {
+        Toast.makeText(this,"click",Toast.LENGTH_LONG).show();
 
     }
 }

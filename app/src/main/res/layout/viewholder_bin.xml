@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Location :1542 , 487 "
+                android:text="AppName "
                 android:id="@+id/location_txt"
                 android:layout_margin="5dp"
                 android:textStyle="bold"/>
@@ -30,25 +30,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DRY waste:"
+                android:text="PackageName:"
                 android:id="@+id/dry_txt"
                 android:layout_margin="5dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="WET waste:"
-                android:id="@+id/wet_txt"
-                android:layout_margin="5dp"
-                />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="METALLIC waste:"
-                android:id="@+id/metallic_txt"
-                android:layout_margin="5dp"
-                />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
