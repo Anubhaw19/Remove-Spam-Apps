@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -84,6 +85,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         TextView AppName,PackageName;
         OnItemListener onItemListener;
         ImageView appIcon;
+        ImageButton imageButton;
 //        PackageManager packageManager=context.getPackageManager();
         public ViewHolder(@NonNull View itemView,OnItemListener onItemListener) {
             super(itemView);
@@ -91,9 +93,10 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
             AppName=itemView.findViewById(R.id.txt_appName);
             PackageName=itemView.findViewById(R.id.txt_packageName);
             appIcon=itemView.findViewById(R.id.app_icon);
+            imageButton=itemView.findViewById(R.id.uninstall_button);
 
 
-            itemView.setOnClickListener(this);
+            imageButton.setOnClickListener(this);
 
         }
 

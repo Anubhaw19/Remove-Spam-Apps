@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -30,8 +32,8 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     private DataAdapter adapter;
     FloatingActionButton btnRefresh;
     ProgressBar progressBar;
-    private ArrayList<String> data2_name=new ArrayList<>();
-    private ArrayList<String> data2_packageName=new ArrayList<>();
+    private ArrayList<String> data2_name = new ArrayList<>();
+    private ArrayList<String> data2_packageName = new ArrayList<>();
 //    PackageManager packageManager;
 
     @Override
@@ -54,6 +56,12 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
                 loadJSON();
+
+
+//                Intent intent = new Intent(Intent.ACTION_DELETE);
+//                intent.setData(Uri.parse("package:com.example.recyclerview"));
+//                startActivity(intent);
+
 
                 Toast.makeText(MainActivity.this, "Refreshing", Toast.LENGTH_LONG).show();
             }
@@ -91,22 +99,25 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
 
 
 
-
+        progressBar.setVisibility(View.INVISIBLE);
         installedApps();
-        adapter = new DataAdapter(data, MainActivity.this,data2_name,data2_packageName,getPackageManager());
+        adapter = new DataAdapter(data, MainActivity.this, data2_name, data2_packageName, getPackageManager());
         recyclerView.setAdapter(adapter);
-
-
-
-
-
 
 
     }
 
     @Override
     public void OnListClick(int position) {
-        Toast.makeText(this, "click", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "  UNINSTALL  ", Toast.LENGTH_LONG).show();
+
+//        Uri packageUri = Uri.parse("package:"+data2_packageName.get(position));
+//        Intent uninstallIntent = new Intent(Intent.ACTION_DELETE,packageUri);
+//        startActivity(uninstallIntent);
+
+        Intent intent = new Intent(Intent.ACTION_DELETE);
+        intent.setData(Uri.parse("package:"+data2_packageName.get(position)));
+        startActivity(intent);
 
     }
 
