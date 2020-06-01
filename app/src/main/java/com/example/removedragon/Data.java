@@ -22,6 +22,14 @@ public class Data {
         return packagName;
     }
 
+    public void setPackagName(String packagName) {
+        this.packagName = packagName;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
     public String getName() {
         return Name;
     }
