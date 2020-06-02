@@ -1,6 +1,7 @@
 package com.example.removedragon;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,9 +48,10 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
 
     private void initViews() {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerBin);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setHasFixedSize(true);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+//        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnRefresh = (FloatingActionButton) findViewById(R.id.btn_refresh);
         btnRefresh.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
 
     }
 
+
     private void installedApps() {
 
         Log.d("MyTag", "Inside Installed Apps ");
@@ -138,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
                 adapter.notifyItemInserted(count);
                 count = count + 1;
             }
-            
+
 
 //            Drawable appIcon = null;
 //            try {

@@ -54,8 +54,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 //        holder.AppName.setText("Name : "+datalist.get(position).getName());
 //        holder.PackageName.setText("package Name : "+datalist.get(position).getPackagName());
 
-        holder.AppName.setText("Name : "+data2_name.get(position));
-        holder.PackageName.setText("package Name : "+data2_packageName.get(position));
+//        holder.AppName.setText("Name : "+data2_name.get(position));
+//        holder.PackageName.setText("package Name : "+data2_packageName.get(position));
 
 
 
@@ -82,21 +82,21 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 //****************************************************************************************************
     protected  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
-        TextView AppName,PackageName;
+//        TextView AppName,PackageName;
         OnItemListener onItemListener;
         ImageView appIcon;
-        ImageButton imageButton;
+//        ImageButton imageButton;
 //        PackageManager packageManager=context.getPackageManager();
         public ViewHolder(@NonNull View itemView,OnItemListener onItemListener) {
             super(itemView);
             this.onItemListener=onItemListener;
-            AppName=itemView.findViewById(R.id.txt_appName);
-            PackageName=itemView.findViewById(R.id.txt_packageName);
+//            AppName=itemView.findViewById(R.id.txt_appName);
+//            PackageName=itemView.findViewById(R.id.txt_packageName);
             appIcon=itemView.findViewById(R.id.app_icon);
-            imageButton=itemView.findViewById(R.id.uninstall_button);
+//            imageButton=itemView.findViewById(R.id.uninstall_button);
 
 
-            imageButton.setOnClickListener(this);
+            itemView.setOnClickListener(this);
 
         }
 
