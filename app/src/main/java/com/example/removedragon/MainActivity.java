@@ -3,6 +3,7 @@ package com.example.removedragon;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +16,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     ArrayList<Drawable> appIcons = new ArrayList<>();
     TextView scanningText;
     private static final int REQUEST_CODE = 1;
+    ImageButton popupMenuButton;
     int p = -1;
 
 
@@ -56,6 +60,37 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
         setContentView(R.layout.activity_main);
 //        Log.d("MyTag", "Inside Main ");
         initViews();
+
+        popupMenuButton = findViewById(R.id.menu_botton);
+        popupMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(MainActivity.this, popupMenuButton);
+                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.one:
+                                Toast.makeText(getApplicationContext(), "1 click", Toast.LENGTH_LONG).show();
+                                return true;
+                            case R.id.two:
+                                Toast.makeText(getApplicationContext(), "2 click", Toast.LENGTH_LONG).show();
+                                return true;
+                            case R.id.three:
+                                Toast.makeText(getApplicationContext(), "3 click", Toast.LENGTH_LONG).show();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+
+                popup.show();
+
+
+            }
+        });
     }
 
     private void initViews() {

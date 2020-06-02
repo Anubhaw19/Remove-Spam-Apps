@@ -35,11 +35,24 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50sp"
+            android:layout_marginBottom="60sp"
             android:paddingHorizontal="60sp"
             android:text="Scan Now"
             android:background="@drawable/maroon_background"
             android:textColor="#ffffff" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:text="Made with ❤️ by Team Voyager"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:layout_alignParentBottom="true"
+
+            />
+
+
     </RelativeLayout>
 
 

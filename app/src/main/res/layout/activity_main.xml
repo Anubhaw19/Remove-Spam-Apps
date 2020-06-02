@@ -9,6 +9,15 @@
     android:animateLayoutChanges="true"
 
     >
+    <ImageButton
+        android:id="@+id/menu_botton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/vector_menu"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="7sp"
+        />
 
 
 
@@ -18,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50sp"
+        android:layout_marginBottom="60sp"
         android:paddingHorizontal="60sp"
         android:textSize="23sp"
         android:textAllCaps="false"
@@ -26,6 +35,17 @@
         android:paddingVertical="15sp"
         android:text="Scan your Device"
         android:textColor="#ffffff" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:text="Made with ❤️ by Team Voyager"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:layout_alignParentBottom="true"
+
+        />
     
 
 
