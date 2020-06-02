@@ -57,13 +57,6 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
             public void onClick(View v) {
                 progressBar.setVisibility(View.VISIBLE);
                 loadJSON();
-
-
-//                Intent intent = new Intent(Intent.ACTION_DELETE);
-//                intent.setData(Uri.parse("package:com.example.recyclerview"));
-//                startActivity(intent);
-
-
                 Toast.makeText(MainActivity.this, "Refreshing", Toast.LENGTH_LONG).show();
             }
         });
@@ -85,10 +78,11 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
 
                 data = new ArrayList<>(Arrays.asList(dataList.getSheet1()));
 
-                installedApps();
 
                 adapter = new DataAdapter(data, MainActivity.this, data2_name, data2_packageName, getPackageManager());
                 recyclerView.setAdapter(adapter);
+                installedApps();
+
             }
 
             @Override
@@ -125,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     private void installedApps() {
 
         Log.d("MyTag", "Inside Installed Apps ");
+        int count = 0;
 
 
         List<PackageInfo> packageList = getPackageManager().getInstalledPackages(0);
@@ -134,18 +129,16 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
 
             String appName = packageInfo.applicationInfo.loadLabel(getPackageManager()).toString();
             String packageName = packageInfo.packageName;
-            for (int j = 0; j < data.size(); j++) {
 
-                Log.d("MyTag",   packageName.equals(data.get(j).getName())+"    "+packageName+"     "+data.get(j).getPackagName());
+            int result=binarySearch(packageName,data);
 
-
-                if (packageName.equals(data.get(j).getPackagName())) {
-                    Log.d("MyTag", " --TRUE-- "+packageName);
-                    data2_name.add(appName);
-                    data2_packageName.add(packageName);
-                }
+            if (result!=-1){
+                data2_name.add(appName);
+                data2_packageName.add(packageName);
+                adapter.notifyItemInserted(count);
+                count = count + 1;
             }
-
+            
 
 //            Drawable appIcon = null;
 //            try {
@@ -157,5 +150,28 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
 //                e.printStackTrace();
 //            }
         }
+    }
+
+    int binarySearch(String x,ArrayList<Data> arr) {
+        int l = 0, r = arr.size()-1;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+
+            int res = x.compareTo(arr.get(m).getPackagName());
+
+            // Check if x is present at mid
+            if (res == 0)
+                return m;
+
+            // If x greater, ignore left half
+            if (res > 0)
+                l = m + 1;
+
+                // If x is smaller, ignore right half
+            else
+                r = m - 1;
+        }
+
+        return -1;
     }
 }
