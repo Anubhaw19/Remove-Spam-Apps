@@ -29,13 +29,15 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     ArrayList<String> data2_name;
 
     PackageManager packageManager;
+    ArrayList<Drawable> appIcons;
 
-    public DataAdapter(ArrayList<Data> datalist,OnItemListener onItemListener,ArrayList<String> data2_name,ArrayList<String> data2_packageName,PackageManager packageManager) {
+    public DataAdapter(OnItemListener onItemListener,ArrayList<String> data2_name,ArrayList<String> data2_packageName,PackageManager packageManager,ArrayList<Drawable> appIcons) {
         this.mOnItemListener=onItemListener;
         this.datalist=datalist;
         this.data2_name=data2_name;
         this.data2_packageName=data2_packageName;
         this.packageManager=packageManager;
+        this.appIcons=appIcons;
     }
 
 
@@ -58,16 +60,14 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 //        holder.PackageName.setText("package Name : "+data2_packageName.get(position));
 
 
+        Drawable temporaryDrawable=appIcons.get(position);
 
-                    Drawable appIcon = null;
-            try {
-                appIcon = packageManager.getApplicationIcon(data2_packageName.get(position));
 
-                holder.appIcon.setImageDrawable(appIcon);
-
-            } catch (PackageManager.NameNotFoundException e) {
-//                holder.appIcon.setImageDrawable(R.drawable.ic_launcher_foreground);
-                e.printStackTrace();
+            if (temporaryDrawable!=null){
+                holder.appIcon.setImageDrawable(appIcons.get(position));
+            }
+            else{
+                holder.appIcon.setImageResource(R.drawable.ic_launcher_foreground);
             }
 
 
