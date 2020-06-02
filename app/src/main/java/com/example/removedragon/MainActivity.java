@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -30,8 +33,8 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     private DataAdapter adapter;
     FloatingActionButton btnRefresh;
     ProgressBar progressBar;
-    private ArrayList<String> data2_name=new ArrayList<>();
-    private ArrayList<String> data2_packageName=new ArrayList<>();
+    private ArrayList<String> data2_name = new ArrayList<>();
+    private ArrayList<String> data2_packageName = new ArrayList<>();
 //    PackageManager packageManager;
 
     @Override
@@ -55,6 +58,12 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
                 progressBar.setVisibility(View.VISIBLE);
                 loadJSON();
 
+
+//                Intent intent = new Intent(Intent.ACTION_DELETE);
+//                intent.setData(Uri.parse("package:com.example.recyclerview"));
+//                startActivity(intent);
+
+
                 Toast.makeText(MainActivity.this, "Refreshing", Toast.LENGTH_LONG).show();
             }
         });
@@ -62,55 +71,62 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     }
 
     private void loadJSON() {
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("https://bit.ly/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-//        Call<DataList> call = apiInterface.getInfo();
-//        call.enqueue(new Callback<DataList>() {
-//            @Override
-//            public void onResponse(Call<DataList> call, Response<DataList> response) {
-//                progressBar.setVisibility(View.INVISIBLE);
-//                DataList dataList = response.body();
-//
-//                data = new ArrayList<>(Arrays.asList(dataList.getSheet1()));
-//                installedApps();
-//                adapter = new DataAdapter(data, MainActivity.this,data2_name,data2_packageName,getPackageManager());
-//                recyclerView.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<DataList> call, Throwable t) {
-//                progressBar.setVisibility(View.INVISIBLE);
-//                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-//
-//            }
-//        });
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://bit.ly/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+        Call<DataList> call = apiInterface.getInfo();
+        call.enqueue(new Callback<DataList>() {
+            @Override
+            public void onResponse(Call<DataList> call, Response<DataList> response) {
+                progressBar.setVisibility(View.INVISIBLE);
+                DataList dataList = response.body();
+
+                data = new ArrayList<>(Arrays.asList(dataList.getSheet1()));
+
+                installedApps();
+
+                adapter = new DataAdapter(data, MainActivity.this, data2_name, data2_packageName, getPackageManager());
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<DataList> call, Throwable t) {
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
 
 
-
-
-
-        installedApps();
-        adapter = new DataAdapter(data, MainActivity.this,data2_name,data2_packageName,getPackageManager());
-        recyclerView.setAdapter(adapter);
-
-
-
-
-
+//        progressBar.setVisibility(View.INVISIBLE);
+//        installedApps();
+//        adapter = new DataAdapter(data, MainActivity.this, data2_name, data2_packageName, getPackageManager());
+//        recyclerView.setAdapter(adapter);
 
 
     }
 
     @Override
     public void OnListClick(int position) {
-        Toast.makeText(this, "click", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "  UNINSTALL  ", Toast.LENGTH_LONG).show();
+
+//        Uri packageUri = Uri.parse("package:"+data2_packageName.get(position));
+//        Intent uninstallIntent = new Intent(Intent.ACTION_DELETE,packageUri);
+//        startActivity(uninstallIntent);
+
+        Intent intent = new Intent(Intent.ACTION_DELETE);
+        intent.setData(Uri.parse("package:" + data2_packageName.get(position)));
+        startActivity(intent);
 
     }
 
     private void installedApps() {
+
+        Log.d("MyTag", "Inside Installed Apps ");
+
+
         List<PackageInfo> packageList = getPackageManager().getInstalledPackages(0);
         for (int i = 0; i < packageList.size(); i++) {
             PackageInfo packageInfo = packageList.get(i);
@@ -118,9 +134,17 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
 
             String appName = packageInfo.applicationInfo.loadLabel(getPackageManager()).toString();
             String packageName = packageInfo.packageName;
+            for (int j = 0; j < data.size(); j++) {
 
-            data2_name.add(appName);
-            data2_packageName.add(packageName);
+                Log.d("MyTag",   packageName.equals(data.get(j).getName())+"    "+packageName+"     "+data.get(j).getPackagName());
+
+
+                if (packageName.equals(data.get(j).getPackagName())) {
+                    Log.d("MyTag", " --TRUE-- "+packageName);
+                    data2_name.add(appName);
+                    data2_packageName.add(packageName);
+                }
+            }
 
 
 //            Drawable appIcon = null;
