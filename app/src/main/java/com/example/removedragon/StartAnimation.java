@@ -3,6 +3,7 @@ package com.example.removedragon;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class StartAnimation extends AppCompatActivity {
 
@@ -27,6 +29,16 @@ public class StartAnimation extends AppCompatActivity {
 //        Animation animation_image = AnimationUtils.loadAnimation(this, R.anim.logo_anim);
 
 //        logoForAnimation.startAnimation(animation_image);
+        TextView textLink = findViewById(R.id.textLink);
+        textLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("https://www.facebook.com/Team-Voyager-100284605056678"); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+
         startScanning = findViewById(R.id.start_scanning);
         startScanning.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,54 +6,85 @@
     android:layout_height="match_parent"
     android:background="@drawable/design_start"
     tools:context=".StartAnimation">
-    <RelativeLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_fileName="app_start_animation.json"
             app:lottie_loop="true" />
 
+<!--        app:lottie_fileName="app_start_animation.json"-->
+
+
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/logo"
             android:layout_marginVertical="25dp"
             android:gravity="center_horizontal"
             android:text="Remove Pakistani and Chinese Apps"
             android:textColor="#000000"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo" />
 
         <Button
             android:id="@+id/start_scanning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:layout_marginBottom="60sp"
+            android:background="@drawable/maroon_background"
             android:paddingHorizontal="60sp"
             android:text="Scan Now"
-            android:background="@drawable/maroon_background"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginBottom="16dp"
             android:gravity="center_horizontal"
-            android:text="Made with ❤️ by Team Voyager"
+            android:text="Made with ❤️ by "
+
             android:textColor="#000000"
             android:textSize="15sp"
-            android:layout_alignParentBottom="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            />
+        <TextView
+            android:id="@+id/textLink"
+            android:layout_width="154dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="16dp"
+            android:text="Team Voyager"
 
 
-    </RelativeLayout>
+            android:textColor="#3B37BE"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>
