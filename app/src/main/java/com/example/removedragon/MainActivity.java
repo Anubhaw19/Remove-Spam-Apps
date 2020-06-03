@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -52,6 +54,11 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     private static final int REQUEST_CODE = 1;
     ImageButton popupMenuButton;
     int p = -1;
+    boolean scanComplete = false;
+    ImageView noAppsAnimation;
+    BottomSheetDialog bottomSheetDialog;
+    View bottomSheetView;
+
 
 
     @Override
@@ -103,10 +110,10 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
                 Toast.makeText(MainActivity.this, "Refreshing", Toast.LENGTH_LONG).show();
 
 
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog
+                bottomSheetDialog = new BottomSheetDialog
                         (MainActivity.this, R.style.BottomSheetDialogTheme);
 
-                View bottomSheetView = LayoutInflater.from(getApplicationContext())
+                bottomSheetView = LayoutInflater.from(getApplicationContext())
                         .inflate(R.layout.demo_layout
                                 , findViewById(R.id.id_for_demo_layout)
                         );
@@ -120,7 +127,21 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
                 recyclerView.setAdapter(adapter);
                 bottomSheetDialog.setContentView(bottomSheetView);
                 bottomSheetDialog.show();
-                loadJSON();
+
+
+                bottomSheetDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        Toast.makeText(MainActivity.this, "Dialog Dismissed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+                if (scanComplete == false) {
+                    loadJSON();
+                } else {
+                    installedApps();
+                }
 
 
             }
@@ -157,69 +178,48 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
 
     }
 
-    @Override
-    public void OnListClick(int position) {
-        Toast.makeText(this, "  UNINSTALL  ", Toast.LENGTH_LONG).show();
-        p = position;
-        Intent intent = new Intent(Intent.ACTION_DELETE);
-        intent.setData(Uri.parse("package:" + data2_packageName.get(position)));
-        startActivityForResult(intent, REQUEST_CODE);
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK
-                && data != null && data.getData() != null) {
-            Toast.makeText(this, "App Uninstalled", Toast.LENGTH_SHORT).show();
-            if (p != -1) {
-                adapter.notifyItemRemoved(p);
-            }
-
-        } else {
-            Toast.makeText(this, "App Not Removed", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
     private void installedApps() {
 
-//        Log.d("MyTag", "Inside Installed Apps ");
         int count = 0;
+        if (scanComplete == false) {
+            List<PackageInfo> packageList = getPackageManager().getInstalledPackages(0);
+            for (int i = 0; i < packageList.size(); i++) {
+                PackageInfo packageInfo = packageList.get(i);
 
+                String appName = packageInfo.applicationInfo.loadLabel(getPackageManager()).toString();
+                String packageName = packageInfo.packageName;
 
-        List<PackageInfo> packageList = getPackageManager().getInstalledPackages(0);
-        for (int i = 0; i < packageList.size(); i++) {
-            PackageInfo packageInfo = packageList.get(i);
+                int result = binarySearch(packageName, data);
 
-
-            String appName = packageInfo.applicationInfo.loadLabel(getPackageManager()).toString();
-            String packageName = packageInfo.packageName;
-
-
-            int result = binarySearch(packageName, data);
-
-            if (result != -1) {
-                data2_name.add(appName);
-                data2_packageName.add(packageName);
+                if (result != -1) {
+                    data2_name.add(appName);
+                    data2_packageName.add(packageName);
 //                Log.d("MyTag", "FOUND ");
 
 
-                try {
-                    appIcons.add(getPackageManager().getApplicationIcon(packageName));
+                    try {
+                        appIcons.add(getPackageManager().getApplicationIcon(packageName));
 
 
-                } catch (PackageManager.NameNotFoundException e) {
-                    appIcons.add(null);
-                    e.printStackTrace();
+                    } catch (PackageManager.NameNotFoundException e) {
+                        appIcons.add(null);
+                        e.printStackTrace();
+                    }
+
+
+                    adapter.notifyItemInserted(count);
+                    count = count + 1;
                 }
-
-
-                adapter.notifyItemInserted(count);
-                count = count + 1;
             }
+            scanComplete = true;
+
         }
+
+        if (data2_packageName.size()==0){
+            noAppsAnimation=findViewById(R.id.no_apps);
+            noAppsAnimation.setVisibility(View.VISIBLE);
+        }
+
         progressBar.setVisibility(View.GONE);
         scanningText.setVisibility(View.GONE);
 
@@ -248,4 +248,51 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
 
         return -1;
     }
+
+    @Override
+    public void OnListClick(int position) {
+        Toast.makeText(this, "  UNINSTALL  ", Toast.LENGTH_LONG).show();
+        p = position;
+        Intent intent = new Intent(Intent.ACTION_DELETE);
+        intent.setData(Uri.parse("package:" + data2_packageName.get(position)));
+        startActivityForResult(intent, REQUEST_CODE);
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            Toast.makeText(this, "App Uninstalled", Toast.LENGTH_SHORT).show();
+            if (p != -1) {
+                adapter.notifyItemRemoved(p);
+            }
+
+        } else {
+            Toast.makeText(this, "App Not Removed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("lifecycle", "onResume invoked");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("lifecycle", "onPause invoked");
+        data2_name.clear();
+        data2_packageName.clear();
+        adapter.notifyDataSetChanged();
+        scanComplete=false;
+        bottomSheetDialog.hide();
+
+    }
+
+
 }
