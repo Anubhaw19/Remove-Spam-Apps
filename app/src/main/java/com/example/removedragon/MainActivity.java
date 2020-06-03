@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     ImageView noAppsAnimation;
     BottomSheetDialog bottomSheetDialog;
     View bottomSheetView;
-
+    DatabaseHelper myDb;
 
 
     @Override
@@ -66,6 +67,11 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        Log.d("MyTag", "Inside Main ");
+        myDb = new DatabaseHelper(this);
+
+
+        storeSQLiteDataBase();
+
         initViews();
 
         popupMenuButton = findViewById(R.id.menu_botton);
@@ -98,6 +104,37 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
 
             }
         });
+    }
+
+    private void storeSQLiteDataBase() {
+        myDb.cleraData(); // to stop replicating  same data multipletimes
+
+        myDb.insertData("app.buzz.share");
+        myDb.insertData("club.fromfactory");
+        myDb.insertData("cn.xender");
+        myDb.insertData("com.commsource.beautyplus");
+        myDb.insertData("com.CricChat.intl");
+        myDb.insertData("com.domobile.applock.lite");
+        myDb.insertData("com.domobile.applockwatcher");
+        myDb.insertData("com.example.recyclerview");
+        myDb.insertData("com.lenovo.anyshare.gps");
+        myDb.insertData("com.ss.android.ugc.boom");
+        myDb.insertData("com.ss.android.ugc.boomlite");
+        myDb.insertData("com.uc.browser.en");
+        myDb.insertData("com.uc.iflow");
+        myDb.insertData("com.uc.vmate");
+        myDb.insertData("com.uc.vmlite");
+        myDb.insertData("com.UCMobile.intl");
+        myDb.insertData("com.ucturbo");
+        myDb.insertData("com.xprodev.cutcam");
+        myDb.insertData("com.zhiliaoapp.musically");
+        myDb.insertData("com.zhiliaoapp.musically.go");
+        myDb.insertData("org.mozilla.firefox");
+        myDb.insertData("video.like");
+Toast.makeText(this,"data loaded",Toast.LENGTH_LONG).show();
+
+        //TODO: insert package name of all apps to store locally
+
     }
 
     private void initViews() {
@@ -136,13 +173,13 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
                     }
                 });
 
-
-                if (scanComplete == false) {
-                    loadJSON();
-                } else {
-                    installedApps();
-                }
-
+//
+//                if (scanComplete == false) {
+//                    loadJSON();
+//                } else {
+//                    installedApps();
+//                }
+                installedApps();
 
             }
         });
@@ -181,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     private void installedApps() {
 
         int count = 0;
+        Cursor res = myDb.getAllData();
         if (scanComplete == false) {
             List<PackageInfo> packageList = getPackageManager().getInstalledPackages(0);
             for (int i = 0; i < packageList.size(); i++) {
@@ -189,7 +227,8 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
                 String appName = packageInfo.applicationInfo.loadLabel(getPackageManager()).toString();
                 String packageName = packageInfo.packageName;
 
-                int result = binarySearch(packageName, data);
+
+                int result = binarySearch(packageName, res);
 
                 if (result != -1) {
                     data2_name.add(appName);
@@ -215,8 +254,8 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
 
         }
 
-        if (data2_packageName.size()==0){
-            noAppsAnimation=findViewById(R.id.no_apps);
+        if (data2_packageName.size() == 0) {
+            noAppsAnimation = findViewById(R.id.no_apps);
             noAppsAnimation.setVisibility(View.VISIBLE);
         }
 
@@ -226,19 +265,19 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
         recyclerView.setVisibility(View.VISIBLE);
     }
 
-    int binarySearch(String x, ArrayList<Data> arr) {
-        int l = 0, r = arr.size() - 1;
+    int binarySearch(String x, Cursor test) {
+        int l = 0, r = test.getCount() - 1;
         while (l <= r) {
             int m = l + (r - l) / 2;
-
-            int res = x.compareTo(arr.get(m).getPackagName());
+            test.moveToPosition(m);
+            int rest = x.compareTo(test.getString(1));
 
             // Check if x is present at mid
-            if (res == 0)
+            if (rest== 0)
                 return m;
 
             // If x greater, ignore left half
-            if (res > 0)
+            if (rest > 0)
                 l = m + 1;
 
                 // If x is smaller, ignore right half
@@ -289,7 +328,7 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
         data2_name.clear();
         data2_packageName.clear();
         adapter.notifyDataSetChanged();
-        scanComplete=false;
+        scanComplete = false;
         bottomSheetDialog.hide();
 
     }
