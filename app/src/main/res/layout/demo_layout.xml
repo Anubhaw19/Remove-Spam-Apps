@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bottom_sheet_main_activity"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
         android:id="@+id/instructions"
         android:layout_width="match_parent"
@@ -54,6 +54,16 @@
         android:layout_gravity="center"
         android:visibility="visible"
         android:animateLayoutChanges="true"
+        />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/no_apps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="anim_tick.json"
+        app:lottie_loop="true"
+        android:visibility="gone"
         />
 
 

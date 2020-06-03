@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -53,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     ImageButton popupMenuButton;
     int p = -1;
     boolean scanComplete = false;
+    ImageView noAppsAnimation;
+    BottomSheetDialog bottomSheetDialog;
+    View bottomSheetView;
+
 
 
     @Override
@@ -104,10 +110,10 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
                 Toast.makeText(MainActivity.this, "Refreshing", Toast.LENGTH_LONG).show();
 
 
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog
+                bottomSheetDialog = new BottomSheetDialog
                         (MainActivity.this, R.style.BottomSheetDialogTheme);
 
-                View bottomSheetView = LayoutInflater.from(getApplicationContext())
+                bottomSheetView = LayoutInflater.from(getApplicationContext())
                         .inflate(R.layout.demo_layout
                                 , findViewById(R.id.id_for_demo_layout)
                         );
@@ -121,6 +127,16 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
                 recyclerView.setAdapter(adapter);
                 bottomSheetDialog.setContentView(bottomSheetView);
                 bottomSheetDialog.show();
+
+
+                bottomSheetDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        Toast.makeText(MainActivity.this, "Dialog Dismissed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
                 if (scanComplete == false) {
                     loadJSON();
                 } else {
@@ -199,6 +215,11 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
 
         }
 
+        if (data2_packageName.size()==0){
+            noAppsAnimation=findViewById(R.id.no_apps);
+            noAppsAnimation.setVisibility(View.VISIBLE);
+        }
+
         progressBar.setVisibility(View.GONE);
         scanningText.setVisibility(View.GONE);
 
@@ -268,6 +289,9 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
         data2_name.clear();
         data2_packageName.clear();
         adapter.notifyDataSetChanged();
+        scanComplete=false;
+        bottomSheetDialog.hide();
+
     }
 
 
