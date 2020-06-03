@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     ImageView noAppsAnimation;
     BottomSheetDialog bottomSheetDialog;
     View bottomSheetView;
+    TextView textLink;
     DatabaseHelper myDb;
 
 
@@ -102,6 +103,15 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
                 popup.show();
 // comments
 
+            }
+        });
+        textLink=findViewById(R.id.textLink);
+        textLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("https://www.facebook.com/Team-Voyager-100284605056678"); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
             }
         });
     }
@@ -156,6 +166,8 @@ Toast.makeText(this,"data loaded",Toast.LENGTH_LONG).show();
                         );
                 progressBar = bottomSheetView.findViewById(R.id.progressBar);
                 scanningText = bottomSheetView.findViewById(R.id.scanning);
+                noAppsAnimation = bottomSheetView.findViewById(R.id.no_apps);
+
 
 
                 recyclerView = bottomSheetView.findViewById(R.id.recyclerBin);
@@ -255,14 +267,14 @@ Toast.makeText(this,"data loaded",Toast.LENGTH_LONG).show();
         }
 
         if (data2_packageName.size() == 0) {
-            noAppsAnimation = findViewById(R.id.no_apps);
             noAppsAnimation.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.INVISIBLE);
         }
 
         progressBar.setVisibility(View.GONE);
         scanningText.setVisibility(View.GONE);
 
-        recyclerView.setVisibility(View.VISIBLE);
+//        recyclerView.setVisibility(View.VISIBLE);
     }
 
     int binarySearch(String x, Cursor test) {
@@ -325,11 +337,15 @@ Toast.makeText(this,"data loaded",Toast.LENGTH_LONG).show();
     protected void onPause() {
         super.onPause();
         Log.d("lifecycle", "onPause invoked");
-        data2_name.clear();
-        data2_packageName.clear();
-        adapter.notifyDataSetChanged();
-        scanComplete = false;
-        bottomSheetDialog.hide();
+        // DO NOT REMOVE
+        // clear data only if scan was started
+
+//        data2_name.clear();
+//        data2_packageName.clear();
+//        adapter.notifyDataSetChanged();
+//        scanComplete=false;
+//        bottomSheetDialog.hide();
+
 
     }
 

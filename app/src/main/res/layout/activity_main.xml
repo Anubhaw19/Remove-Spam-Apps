@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/ic_vector_background"
     android:animateLayoutChanges="true"
+    android:background="@drawable/ic_vector_background"
 
-    >
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300sp"
+        android:layout_height="350sp"
+        android:layout_marginTop="170sp"
+
+        android:src="@drawable/ic_vector_logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageButton
         android:id="@+id/menu_botton"
         android:layout_width="30sp"
         android:layout_height="wrap_content"
-        android:background="@drawable/vector_menu"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="7sp"
-        />
+        android:layout_marginStart="7sp"
+        android:layout_marginTop="7sp"
+        android:layout_marginEnd="7sp"
+        android:layout_marginBottom="7sp"
+        android:src="@drawable/vector_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 
@@ -25,28 +39,46 @@
         android:id="@+id/scan_again"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="60sp"
-        android:paddingHorizontal="60sp"
-        android:textSize="23sp"
-        android:textAllCaps="false"
         android:alpha="0.90"
+        android:paddingHorizontal="60sp"
         android:paddingVertical="15sp"
         android:text="Scan your Device"
-        android:textColor="#ffffff" />
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center_horizontal"
-        android:text="Made with ❤️ by Team Voyager"
+        android:text="Made with ❤️ by "
+
         android:textColor="#000000"
         android:textSize="15sp"
-        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        />
-    
+    <TextView
+        android:id="@+id/textLink"
+        android:layout_width="154dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="16dp"
+        android:text="Team Voyager"
 
 
-</RelativeLayout>
+        android:textColor="#3B37BE"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
