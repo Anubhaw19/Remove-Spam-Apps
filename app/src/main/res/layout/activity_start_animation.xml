@@ -49,7 +49,6 @@
             android:id="@+id/start_scanning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="60sp"
             android:background="@drawable/maroon_background"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
