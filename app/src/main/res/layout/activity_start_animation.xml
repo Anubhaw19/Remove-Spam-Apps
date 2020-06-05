@@ -26,7 +26,7 @@
             app:lottie_fileName="app_start_animation.json"
             app:lottie_loop="true" />
 
-<!--        app:lottie_fileName="app_start_animation.json"-->
+        <!--        app:lottie_fileName="app_start_animation.json"-->
 
 
         <TextView
@@ -35,24 +35,24 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/logo"
             android:layout_marginVertical="5dp"
+            android:fontFamily="@font/montserrat"
             android:gravity="center_horizontal"
             android:text="Protect your Phone\nRemove Spam Apps"
-            android:fontFamily="@font/montserrat"
             android:textColor="#000000"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logo" />
-            android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="5dp"/>
 
 
         <Button
             android:id="@+id/start_scanning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/maroon_background"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="45dp"
+            android:background="@drawable/maroon_background"
             android:paddingHorizontal="60sp"
             android:text="Next"
             android:textAllCaps="false"
@@ -65,11 +65,11 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="88dp"
+            android:layout_marginStart="60dp"
             android:layout_marginBottom="16dp"
+            android:fontFamily="sans-serif-light"
             android:gravity="center_horizontal"
-            android:text="Made with ❤️ by "
-
+            android:text="Developed with ❤️ by "
             android:textColor="#000000"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -80,14 +80,14 @@
             android:layout_width="154dp"
             android:layout_height="25dp"
             android:layout_marginBottom="16dp"
+            android:fontFamily="sans-serif-light"
+
             android:text="Team Voyager"
-
-
             android:textColor="#3B37BE"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.215"
             app:layout_constraintStart_toEndOf="@+id/textView" />
 
 
