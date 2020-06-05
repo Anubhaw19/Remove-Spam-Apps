@@ -3,13 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/one"
-        android:title="share"
+        android:title="share "
+        android:icon="@drawable/ic_baseline_share_24"
+        app:showAsAction="always"
 
        />
     <item
         android:id="@+id/two"
-        android:title="rate us"/>
+        android:title="rate us"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_star_24"/>
     <item
         android:id="@+id/three"
-        android:title="about us"/>
+        android:title="about us"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_error_24"/>
 </menu>

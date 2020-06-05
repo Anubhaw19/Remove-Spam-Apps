@@ -2,6 +2,7 @@ package com.example.removedragon;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +27,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -74,43 +78,7 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
         popupMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(MainActivity.this, popupMenuButton);
-                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
-
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.one:
-                                Toast.makeText(getApplicationContext(), "share", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(Intent.ACTION_SEND);
-                                intent.setType("text/plain");
-                                String ShareBody = "check your phone for malicious apps," + "\n" +
-                                        "install *REMOVE_DARGON* app" + "\n\n" +
-                                        "https://www.facebook.com/Team-Voyager-100284605056678";
-                                String ShareSub = "Remove Spam APPs";
-                                intent.putExtra(Intent.EXTRA_SUBJECT, ShareSub);
-                                intent.putExtra(Intent.EXTRA_TEXT, ShareBody);
-                                startActivity(Intent.createChooser(intent, "Share Using"));
-
-                                return true;
-                            case R.id.two:
-                                Toast.makeText(getApplicationContext(), "rate us", Toast.LENGTH_LONG).show();
-                                Uri uri = Uri.parse("https://www.facebook.com/Team-Voyager-100284605056678"); // missing 'http://' will cause crashed
-                                Intent intent2 = new Intent(Intent.ACTION_VIEW, uri);
-                                startActivity(intent2);
-                                return true;
-                            case R.id.three:
-                                Toast.makeText(getApplicationContext(), "about us", Toast.LENGTH_LONG).show();
-                                Uri uri2 = Uri.parse("https://www.facebook.com/Team-Voyager-100284605056678"); // missing 'http://' will cause crashed
-                                Intent intent3= new Intent(Intent.ACTION_VIEW, uri2);
-                                startActivity(intent3);
-                                return true;
-                            default:
-                                return false;
-                        }
-                    }
-                });
-                popup.show();
+                showPopupOption(v); //method for popup menu.
             }
         });
         textLink = findViewById(R.id.textLink);
@@ -122,6 +90,50 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
                 startActivity(intent);
             }
         });
+    }
+    @SuppressLint("RestrictedApi")
+    private void showPopupOption(View v){
+        PopupMenu popup = new PopupMenu(MainActivity.this, v);
+        popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem menu_item) {
+                switch (menu_item.getItemId()) {
+                    case R.id.one:
+                        Toast.makeText(getApplicationContext(), "share", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("text/plain");
+                        String ShareBody = "check your phone for malicious apps," + "\n" +
+                                "install *REMOVE_DARGON* app" + "\n\n" +
+                                "https://www.facebook.com/Team-Voyager-100284605056678";
+                        String ShareSub = "Remove Spam APPs";
+                        intent.putExtra(Intent.EXTRA_SUBJECT, ShareSub);
+                        intent.putExtra(Intent.EXTRA_TEXT, ShareBody);
+                        startActivity(Intent.createChooser(intent, "Share Using"));
+                        break;
+
+                    case R.id.two:
+                        Toast.makeText(getApplicationContext(), "rate us", Toast.LENGTH_LONG).show();
+                        Uri uri = Uri.parse("https://www.facebook.com/Team-Voyager-100284605056678"); // missing 'http://' will cause crashed
+                        Intent intent2 = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent2);
+                        break;
+
+                    case R.id.three:
+                        Toast.makeText(getApplicationContext(), "about us", Toast.LENGTH_LONG).show();
+                        Uri uri2 = Uri.parse("https://www.facebook.com/Team-Voyager-100284605056678"); // missing 'http://' will cause crashed
+                        Intent intent3= new Intent(Intent.ACTION_VIEW, uri2);
+                        startActivity(intent3);
+                        break;
+                }
+                return true;
+            }
+        });
+
+        MenuPopupHelper menuHelper = new MenuPopupHelper(MainActivity.this, (MenuBuilder) popup.getMenu(), v);
+        menuHelper.setForceShowIcon(true);
+        menuHelper.setGravity(Gravity.END);
+        menuHelper.show();
     }
 
     private void initViews() {
