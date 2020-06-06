@@ -21,16 +21,13 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -47,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     TextView scanningText;
     ImageButton popupMenuButton;
     int p = -1;
-    //    boolean scanComplete = false;
     LottieAnimationView noAppsAnimation;
     BottomSheetDialog bottomSheetDialog;
     View bottomSheetView;
@@ -67,14 +63,12 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
         setContentView(R.layout.activity_main);
 
         initViews();
-
         popupMenuButton = findViewById(R.id.menu_botton);
         popupMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(MainActivity.this, popupMenuButton);
                 popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
-
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
@@ -188,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
             if (result != -1) {
                 final_name.add(appName);
                 final_packageName.add(packageName);
-                Log.d(TAG, "FOUND " + appName);
+                Log.d(TAG, "FOUND " + appName+" "+packageName);
                 try {
                     appIcons.add(getPackageManager().getApplicationIcon(packageName));
                 } catch (PackageManager.NameNotFoundException e) {

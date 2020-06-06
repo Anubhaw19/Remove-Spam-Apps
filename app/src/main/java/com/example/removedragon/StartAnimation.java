@@ -25,10 +25,6 @@ public class StartAnimation extends AppCompatActivity {
         setContentView(R.layout.activity_start_animation);
 
         logoForAnimation = findViewById(R.id.logo);
-
-//        Animation animation_image = AnimationUtils.loadAnimation(this, R.anim.logo_anim);
-
-//        logoForAnimation.startAnimation(animation_image);
         TextView textLink = findViewById(R.id.textLink);
         textLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +34,6 @@ public class StartAnimation extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         startScanning = findViewById(R.id.start_scanning);
         startScanning.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +42,5 @@ public class StartAnimation extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 }
