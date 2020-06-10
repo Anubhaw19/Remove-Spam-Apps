@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/zero"
+        android:title="Report an App"
+        android:icon="@drawable/vector_report"
+
+        />
     <item
         android:id="@+id/one"
-        android:title="One" />
+        android:title="Share"
+        android:icon="@drawable/vector_whatsapp"
+       />
+
     <item
         android:id="@+id/two"
-        android:title="Two"/>
+        android:title="Feedback"
+        android:icon="@drawable/vector_feedback"
+        />
     <item
         android:id="@+id/three"
-        android:title="Three"/>
+        android:title="About us"
+        android:icon="@drawable/vector_about_us"
+
+        />
+    <item
+        android:id="@+id/four"
+        android:title="Rate us"
+        android:icon="@drawable/vector_play_store"
+
+        />
+
 </menu>

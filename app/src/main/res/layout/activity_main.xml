@@ -10,75 +10,113 @@
 
     tools:context=".MainActivity">
 
+
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="300sp"
-        android:layout_height="350sp"
-        android:layout_marginTop="170sp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
 
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/ic_vector_logo"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32999998" />
 
     <ImageButton
         android:id="@+id/menu_botton"
-        android:layout_width="30sp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7sp"
-        android:layout_marginTop="7sp"
-        android:layout_marginEnd="7sp"
-        android:layout_marginBottom="7sp"
+        android:layout_width="31dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:contentDescription="TODO"
         android:src="@drawable/vector_menu"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
 
-
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
+        />
 
     <Button
         android:id="@+id/scan_again"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60sp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:alpha="0.90"
-        android:paddingHorizontal="60sp"
-        android:paddingVertical="15sp"
-        android:text="Scan your Device"
+        android:paddingHorizontal="60dp"
+        android:paddingVertical="15dp"
+        android:text="@string/scan_your_device"
         android:textAllCaps="false"
         android:textColor="#ffffff"
-        android:textSize="23sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:textSize="23dp"
 
-    <TextView
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintVertical_bias="0.9" />
+
+    <LinearLayout
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
-        android:text="Made with ❤️ by "
-
-        android:textColor="#000000"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textLink"
-        android:layout_width="154dp"
-        android:layout_height="25dp"
-        android:layout_marginBottom="16dp"
-        android:text="Team Voyager"
-
-
-        android:textColor="#3B37BE"
-        android:textSize="20sp"
+        android:orientation="horizontal"
+        app:layout_constraintVertical_bias="0.65"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scan_again">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Made with ❤️ by "
+            android:textColor="#000000"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/textLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Team Voyager"
+            android:textColor="#3B37BE"
+            android:textSize="15dp" />
+
+
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

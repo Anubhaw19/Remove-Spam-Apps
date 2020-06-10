@@ -13,8 +13,8 @@ android {
         applicationId 'com.uninstall.removespam'
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,10 +36,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.8.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.8.2'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.android.volley:volley:1.1.1'
 }
