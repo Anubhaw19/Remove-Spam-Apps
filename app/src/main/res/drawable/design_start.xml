@@ -4,14 +4,18 @@
     >
     <item
         android:gravity="top"
-        android:height="200dp"
+        android:height="150dp"
         >
         <shape
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:shape="rectangle" >
+            android:shape="rectangle"
+
+            >
             <solid android:color="#5dadfa" />
+
         </shape>
     </item>
+
 
 
 </layer-list>

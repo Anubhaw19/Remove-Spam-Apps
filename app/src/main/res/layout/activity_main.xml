@@ -6,36 +6,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/ic_vector_background"
+    android:background="#F9FAFE"
 
     tools:context=".MainActivity">
 
 
-    <ImageView
+    <androidx.cardview.widget.CardView
         android:id="@+id/imageView"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_vector_logo"
+        android:background="#F9FAFE"
+        android:elevation="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998" />
+        app:layout_constraintVertical_bias="0.110000014"
+
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F9FAFE"
+            android:src="@drawable/ic_vector_logo"
+
+            />
+    </androidx.cardview.widget.CardView>
 
     <ImageButton
         android:id="@+id/menu_botton"
-        android:layout_width="31dp"
-        android:layout_height="63dp"
+        android:layout_width="23dp"
+        android:layout_height="50dp"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
@@ -44,6 +56,7 @@
         android:layout_marginBottom="5dp"
         android:contentDescription="TODO"
         android:src="@drawable/vector_menu"
+        android:background="@drawable/blue_button_background"
 
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,11 +78,12 @@
         android:layout_marginBottom="8dp"
         android:alpha="0.90"
         android:paddingHorizontal="60dp"
-        android:paddingVertical="15dp"
+        android:paddingVertical="5dp"
         android:text="@string/scan_your_device"
         android:textAllCaps="false"
         android:textColor="#ffffff"
         android:textSize="23dp"
+        android:background="@drawable/blue_background"
 
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -117,6 +131,32 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/openSource"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This app is open source\nDevelopers can view/contribute here"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="github.com/anandshivam44/Remove_Spam_Apps"
+            android:textColor="#3B37BE"
+            />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

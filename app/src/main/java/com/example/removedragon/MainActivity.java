@@ -18,9 +18,11 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     private DataAdapter adapter;
     private ArrayList<String> final_name = new ArrayList<>();
     private ArrayList<String> final_packageName = new ArrayList<>();
+    LinearLayout openSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +97,15 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
             @Override
             public void onClick(View v) {
                 Uri uri = Uri.parse("https://www.facebook.com/Team-Voyager-100284605056678"); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+        openSource=findViewById(R.id.openSource);
+        openSource.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("https://github.com/anandshivam44/Remove_Spam_Apps"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
