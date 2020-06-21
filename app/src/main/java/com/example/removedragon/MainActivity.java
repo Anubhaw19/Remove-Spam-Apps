@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
     private DataAdapter adapter;
     private ArrayList<String> final_name = new ArrayList<>();
     private ArrayList<String> final_packageName = new ArrayList<>();
-    LinearLayout openSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,15 +100,7 @@ public class MainActivity extends AppCompatActivity implements DataAdapter.OnIte
                 startActivity(intent);
             }
         });
-        openSource=findViewById(R.id.openSource);
-        openSource.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse("https://github.com/anandshivam44/Remove_Spam_Apps"); // missing 'http://' will cause crashed
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
+
     }
 
     @SuppressLint("RestrictedApi")

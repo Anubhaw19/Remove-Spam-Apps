@@ -387,7 +387,6 @@ com.videostatusmultimedia
 com.virus.cleaner.antivirus
 com.vpn.x
 com.w.video
-com.wMivideocallandchat_9258593
 com.wafour.wapicchinese
 com.wallpakistaninews_10296173
 com.wchinavideocall_8736430
